@@ -10,6 +10,10 @@
     {{- with .Params.tags }}
       <meta name="keywords" content="{{- range . -}}{{ . }}, {{- end }}" />
     {{- end }}
+    {{ if .RSSLink }}
+      <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+      <link href="{{ .RSSLink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+    {{ end }}
     {{ $style := resources.Get "css/main.scss" | resources.ExecuteAsTemplate "css/main.scss" . | resources.ToCSS | resources.Minify | resources.Fingerprint -}}
     <link rel="stylesheet" href="{{ $style.Permalink }}" />
 
@@ -36,9 +40,15 @@
       <div class="app-header-social">
         {{ range .Site.Params.social }}
           <a
-            target="_blank"
             href="{{ .url }}"
-            rel="noreferrer noopener me"
+            target="_blank"
+            {{ if eq .name "rss" }}
+              type="application/rss+xml"
+            {{ else if eq .name "mastodon"}}
+              rel="me"
+            {{ else }}
+              rel="noreferrer noopener"
+            {{ end }}
             >
             {{ partial "icon.html" (dict "ctx" $ "name" .name ) }}
           </a>
