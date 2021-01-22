@@ -10,10 +10,12 @@
     {{- with .Params.tags }}
       <meta name="keywords" content="{{- range . -}}{{ . }}, {{- end }}" />
     {{- end }}
-    {{ if .RSSLink }}
-      <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
-      <link href="{{ .RSSLink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+
+    {{ if .OutputFormats.Get "RSS" }}
+      <link href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}{{ if not .IsHome }} // {{ .Title }}{{ end }}" />
+      <link href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}{{ if not .IsHome }} // {{ .Title }}{{ end }}" />
     {{ end }}
+
     {{ $style := resources.Get "css/main.scss" | resources.ExecuteAsTemplate "css/main.scss" . | resources.ToCSS | resources.Minify | resources.Fingerprint -}}
     <link rel="stylesheet" href="{{ $style.Permalink }}" />
 
