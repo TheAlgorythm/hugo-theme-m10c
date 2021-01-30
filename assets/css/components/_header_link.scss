@@ -1,0 +1,12 @@
+.header-icon-link {
+  visibility: hidden;
+  padding-right: 0.3em;
+
+  :hover > & {
+    visibility: visible;
+  }
+}
+
+.linked-header {
+  margin-left: -1.3em;
+}

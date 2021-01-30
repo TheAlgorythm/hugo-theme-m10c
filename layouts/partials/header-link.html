@@ -1,0 +1,5 @@
+{{ $icon := partial "icon.html" (dict "ctx" .ctx "name" "link-2") }}
+{{ $content := .content | replaceRE "(<h[2-6] id=\"([^\"]+)\">)(.+)(</h[2-6]+>)" `${1}<a class="header-icon-link" href="#${2}"><i data-feather="link"></i></a>${3}${4}` }}
+{{ $content := replaceRE "(<h[2-6])(.+)" `${1} class="linked-header"${2}` $content }}
+{{ $content := replaceRE "<i data-feather=\"link\"></i>" $icon $content }}
+{{ $content | safeHTML }}
