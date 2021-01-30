@@ -1,0 +1,16 @@
+.header-icon-link {
+  color: $darkest-color;
+  padding-right: 0.3em;
+
+  :hover > & {
+    color: $primary-color;
+  }
+
+  :hover {
+    color: $light-color;
+  }
+}
+
+.linked-header {
+  margin-left: -1.3em;
+}

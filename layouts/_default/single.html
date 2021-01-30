@@ -26,7 +26,7 @@
       {{- end }}
     </header>
     <div class="post-content">
-      {{ .Content }}
+      {{ partial "header-link.html" (dict "ctx" $ "content" .Content) }}
     </div>
     <div class="post-footer">
       {{ template "_internal/disqus.html" . }}
