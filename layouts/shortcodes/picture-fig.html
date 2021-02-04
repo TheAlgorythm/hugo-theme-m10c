@@ -1,0 +1,14 @@
+{{ $image := .Get "img"}}
+{{ $type_arr := split $image "." }}
+{{ $srcbase := index $type_arr 0 }}
+
+<figure>
+    <picture>
+      <source srcset="{{$srcbase}}.avif" type="image/avif">
+      <source srcset="{{$srcbase}}.webp" type="image/webp">
+      <img src="{{.Get `img`}}" alt="{{.Get `alt` }}" defer>
+    </picture>
+    <figcaption>
+      <p class="caption">{{ .Get "text" | markdownify }}</p>
+    </figcaption>
+</figure>
