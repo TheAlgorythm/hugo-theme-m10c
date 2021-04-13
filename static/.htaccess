@@ -1,0 +1,3 @@
+Header add Permissions-Policy "interest-cohort=()"
+
+ErrorDocument 404 /404.html
