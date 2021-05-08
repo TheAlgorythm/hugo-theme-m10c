@@ -3,7 +3,7 @@
   <head>
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} // {{ .Site.Title }}{{ end }}</title>
     <meta charset="utf-8" />
-    <meta http-equiv="Content-Security-Policy" content=" default-src 'none'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none';">
+    <meta http-equiv="Content-Security-Policy" content=" default-src 'none'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; form-action 'none';">
     {{ hugo.Generator }}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="{{ .Site.Params.author | default "John Doe" }}" />
@@ -19,8 +19,11 @@
 
     {{ $style := resources.Get "css/main.scss" | resources.ExecuteAsTemplate "css/main.scss" . | resources.ToCSS | resources.Minify | resources.Fingerprint -}}
     <link rel="stylesheet" href="{{ $style.Permalink }}" />
+    {{ if .Params.asciinema }}
     {{ $asciinema_style := resources.Get "css/asciinema-player.css" | resources.Minify | resources.Fingerprint -}}
     <link rel="stylesheet" type="text/css" href="{{ $asciinema_style.Permalink }}" />
+    <script src="/asciinema-player.js"></script>
+    {{ end }}
 
     {{ template "_internal/google_analytics.html" . }}
     {{ template "_internal/twitter_cards.html" . }}
@@ -50,7 +53,7 @@
             {{ if eq .name "rss" }}
               type="application/rss+xml"
             {{ else if eq .name "mastodon"}}
-              rel="me"
+              rel="me noreferrer noopener"
             {{ else }}
               rel="noreferrer noopener"
             {{ end }}
