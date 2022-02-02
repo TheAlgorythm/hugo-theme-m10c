@@ -17,6 +17,17 @@ h1, h2, h3, h4, h5, h6 {
   color: $lightest-color;
 }
 
+#home-title {
+  @extend h1;
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
 a {
   color: $primary-color;
   transition: color 0.35s;

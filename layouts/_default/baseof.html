@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="{{ .Site.Params.author | default "John Doe" }}" />
     <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}" />
-    {{- with .Params.tags }}
+    {{- with (union .Params.tags .Params.keywords) }}
       <meta name="keywords" content="{{- range . -}}{{ . }}, {{- end }}" />
     {{- end }}
 
@@ -33,7 +33,7 @@
   <body>
     <header class="app-header">
       <a href="{{ .Site.BaseURL }}"><img class="app-header-avatar" src="{{ .Site.Params.avatar | default "avatar.jpg" | relURL }}" alt="{{ .Site.Params.author | default "John Doe" }}" /></a>
-      <h1>{{ .Site.Title }}</h1>
+      <a href="{{ .Site.BaseURL }}" id="home-title">{{ .Site.Title }}</a>
       {{- with .Site.Menus.main }}
       <nav class="app-header-menu">
         {{- range $key, $item := . }}
