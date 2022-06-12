@@ -1,0 +1,12 @@
+{{/* from https://gist.github.com/jbr/b59c5ca43ac30cff27fe037a71ebaedf */}}
+
+{{ $file := .Get "file" | readFile }}
+{{ $lines := split $file "\n" }}
+
+{{/* you may want to change this default */}}
+{{ $lang := default "" (.Get "language") }}
+
+{{ $start := default 0 (.Get "from") }}
+{{ $end := default (len $lines) (.Get "to") }}
+{{ $output := delimit (after $start (first $end $lines)) "\n" }}
+{{ (print "```" $lang "\n" $output "\n```") | markdownify}}
