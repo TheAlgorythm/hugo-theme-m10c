@@ -2,4 +2,9 @@ Header add Strict-Transport-Security "max-age=31536000; includeSubDomains;"
 Header add Content-Security-Policy "default-src 'none'; img-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none';"
 Header add Permissions-Policy "interest-cohort=()"
 
+# from https://github.com/healsdata/ai-training-opt-out/blob/main/headers.txt
+Header add X-Robots-Tag "noimageai"
+Header add X-Robots-Tag: "noai"
+Header add tdm-reservation: "1"
+
 ErrorDocument 404 /404.html
